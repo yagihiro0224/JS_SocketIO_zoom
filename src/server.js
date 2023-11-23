@@ -1,4 +1,15 @@
+// 페이지 새로 고침 자동화.
+import livereloadMiddleware from "connect-livereload";
+import livereload from "livereload";
 import experss, { application } from "express";
+
+// 페이지 새로 고침 자동화.
+const liveServer = livereload.createServer({
+  exts: ["js", "pug", "css"],
+  delay: 1000,
+});
+liveServer.watch(__dirname);
+app.use(livereloadMiddleware());
 
 const app = experss();
 
