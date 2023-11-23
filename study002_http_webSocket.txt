@@ -22,3 +22,9 @@
 13. http도 브라우저-backEnd, backEnd-backEnd 다 가능함.
 
 ※브라우저 = 클라이언트
+
+[ws:a Node.js WebSocket library]
+1. ws는 webSocket의 코어 라이브러리다. 유틸리티가 없다. 그러나 이걸 이용한 편리한 framework가 이미 있다.
+2. foundation 완전 기초라는 의미.
+3. ws를 모르고 framework를 쓴다는건 바닐라 JS를 모르고 React하는거랑 같다.
+4. 

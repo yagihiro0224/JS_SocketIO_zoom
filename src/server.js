@@ -1,15 +1,6 @@
-// 페이지 새로 고침 자동화.
-import livereloadMiddleware from "connect-livereload";
-import livereload from "livereload";
+import http from "http";
+import WebSocket from "ws";
 import experss, { application } from "express";
-
-// 페이지 새로 고침 자동화.
-const liveServer = livereload.createServer({
-  exts: ["js", "pug", "css"],
-  delay: 1000,
-});
-liveServer.watch(__dirname);
-app.use(livereloadMiddleware());
 
 const app = experss();
 
@@ -20,4 +11,9 @@ app.get("/", (req, res) => res.render("home"));
 app.get("/*", (req, res) => res.redirect("/"));
 
 const handleListen = () => console.log(`Listening on http://localhost:3000`);
-app.listen(3000, handleListen);
+
+// http server, ws server 둘다 돌리기 위한 코드. http가 필요없을 경우엔 ws만 코딩하면 됨.
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+server.listen(3000, handleListen);
