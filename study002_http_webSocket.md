@@ -24,9 +24,23 @@
 13. http도 브라우저-backEnd, backEnd-backEnd 다 가능함.
     ※브라우저 = 클라이언트
 
-[ws:a Node.js WebSocket library]
+[ws:a Node.js WebSocket library,https://www.npmjs.com/package/ws]
 
-1. ws는 webSocket의 코어 라이브러리다. 유틸리티가 없다. 그러나 이걸 이용한 편리한 framework가 이미 있다.
-2. foundation 완전 기초라는 의미.
-3. ws를 모르고 framework를 쓴다는건 바닐라 JS를 모르고 React하는거랑 같다.
-4.
+1. node.js(코딩 언어)로 webSocket서버를 만든다. ws라는 멋진 package의 도움을 받는다.
+2. ws는 사용하기 편하고 아주 빠르면 클라이언트와 서버 사이의 webSocket실행에서 검증된 놈임.
+3. [protocol]은 어떤 사람들이 어딘가에 있는 방에서 만나고 그리고 어떻게 일들이 진행됳지를 결정한다.
+   어떻게 모든 것이 돌아가야 할지에 대한 규칙을 만든다.
+   그런 다음 프로그래머는 이 규칙을 가지고 이 규칙을 따르는 코드를 만들어서 실행함.
+   규칙이 가장 먼저 정해져야 됨. 그래서 Node.js를 위한 webSocket implementation(실장) 이라고 하는거다.
+   C#,JAVA등등 다른언어 용으로도 webSocket implementation을 찾을수 있다.
+   이 말은 이건 그냥 어떤 규칙을 따르는 코드라는 뜻이다.
+   그리고 ws는 webSocket protocol을 실행하는 package 인거다.
+   ws만 가지고 채팅방을 만들수는 있으나 전부 구현해야하는 어려움이 있다.
+   하지만 이미 채팅방 기능이 있는 framework가 존재한다.
+   그러나 우린 ws의 최소한의 기초(핵심) 공부를 위해 아직은 framework를 사용하지 않을것이다.
+   ws는 webSocket의 core이다. 가장 기초적인 것이며 부가적인 유틸리티가 없다.
+   ws는 webSocket의 foundation(완전 기초라는 의미)이다.
+   ws를 모르고 framework를 쓴다는건 바닐라 JS를 모르고 React하는거랑 같다.
+4. 터미널 [$ npm i ws]로 설치.
+5. express는 http를 다루고 있지만 ws를 다루도록 할꺼다.
+6.
