@@ -19,15 +19,15 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 // on 메소드는 이벤트가 발생하길 기다림. 발생하면 해당 함수를 실행함.
-// socket은 너와 브라우저와의 연결이다.
+// socket은 너와 브라우저와의 연결이다. 누가 연결됬는지 정보가 들어있슴.
 wss.on("connection", (socket) => {
   console.log("Connected to Browser ✅");
   socket.send("Hello!!!");
   socket.on("close", () => console.log("Disconnected from the Browser ❌"));
 
-  // 브라우저에서 온 메세지.
+  // 브라우저에서 온 메세지를 받았을때.
   socket.on("message", (message) => {
-    console.log(message.toString("utf8"));
+    socket.send(message.toString());
   });
 });
 
