@@ -18,11 +18,11 @@ const handleListen = () => console.log("Listening on http://localhost:3000");
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-// socket 너와 브라우저와의 연결이다.
-function handleConnection(socket) {
-  console.log(socket);
-}
 // on 메소드는 이벤트가 발생하길 기다림. 발생하면 해당 함수를 실행함.
-wss.on("connection", handleConnection);
+// socket은 너와 브라우저와의 연결이다.
+wss.on("connection", (socket) => {
+  console.log("Connected to Browser ✅");
+  socket.send("Hello");
+});
 
 server.listen(3000, handleListen);
