@@ -22,7 +22,13 @@ const wss = new WebSocket.Server({ server });
 // socket은 너와 브라우저와의 연결이다.
 wss.on("connection", (socket) => {
   console.log("Connected to Browser ✅");
-  socket.send("Hello");
+  socket.send("Hello!!!");
+  socket.on("close", () => console.log("Disconnected from the Browser ❌"));
+
+  // 브라우저에서 온 메세지.
+  socket.on("message", (message) => {
+    console.log(message.toString("utf8"));
+  });
 });
 
 server.listen(3000, handleListen);
