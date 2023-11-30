@@ -43,4 +43,4 @@
    ws를 모르고 framework를 쓴다는건 바닐라 JS를 모르고 React하는거랑 같다.
 4. 터미널 [$ npm i ws]로 설치.
 5. express는 http를 다루고 있지만 ws를 다루도록 할꺼다.
-6.
+
