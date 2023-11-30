@@ -21,7 +21,23 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket) => {
-  console.log(socket);
+  socket.onAny((event) => {
+    console.log(`Socket event: ${event}`);
+  });
+  // 이런 식으로 우리가 원하는 특정이름(enter_room)의 이벤트를 넣을 수 있슴.
+  socket.on("enter_room", (roomname, done) => {
+    // console.log(socket.id);
+    // console.log(socket.rooms);
+    // console.log(roomname);
+    // console.log(socket.room);
+    socket.join(roomname);
+    setTimeout(() => {
+      // back-end가 이 코드를 실행 시키는게 아니다.
+      // 그렇다면 큰 보안문제가 되겠지?
+      // 그냥 이 함수를 처리하라고 front-end에 콜백 하는거임.
+      done("hello form the background.");
+    }, 10000);
+  });
 });
 // const sockets = [];
 

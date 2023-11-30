@@ -100,4 +100,3 @@ https://youtu.be/Tt_tKhhhJqY
     app.use(cors())
     </pre>
 29. [Deploy]실제 서버에 올리는 걸 의미. 릴리스 같은 개념.
-30. 
