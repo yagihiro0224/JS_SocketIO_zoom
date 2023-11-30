@@ -50,4 +50,4 @@
 9. babel-node를 실행시키면 babel-node는 바로 babel.config.json을 찾을테고
    babel.config.json 파일의 presets를 실행 시킴.
    <pre>"presets": ["@babel/preset-env"]</pre>
-10. 
+10. 터미널에서 npm run dev로 모듈 실행한다(개발용 빌드 실행 커맨드).

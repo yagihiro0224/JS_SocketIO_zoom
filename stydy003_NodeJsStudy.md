@@ -47,4 +47,4 @@ https://youtu.be/Tt_tKhhhJqY
 19. [콜백함수]함수(끝나고 실행할 함수<-다른 코드의 인수로서 넘겨주는 실행 가능한 코드)
 20. setTimeout(()=>{},1000) 1000미리세컨드 뒤에 [()=>{}]콜백함수를 실행해라.
 21. JSON(JavaScript Object Notation).
-22.
+
