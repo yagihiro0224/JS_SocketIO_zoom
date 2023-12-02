@@ -22,7 +22,8 @@ wsServer.on("connection", (socket) => {
   socket.onAny((event) => {
     console.log(`Socket event: ${event}`);
   });
-  socket.on("enter_room", (roomname, done) => {
+  socket.on("enter_room", (roomname, nickname, done) => {
+    socket["nickname"] = nickname;
     // join: SocketIO가 room을 제공해주는것.
     socket.join(roomname);
     done();
