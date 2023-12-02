@@ -17,16 +17,20 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket) => {
+  // onAny: Socket안에 어떠한 이벤트도 감시할 수 있는 기능.
   socket.onAny((event) => {
     console.log(`Socket event: ${event}`);
   });
   socket.on("enter_room", (roomname, done) => {
+    // join: SocketIO가 room을 제공해주는것.
     socket.join(roomname);
     done();
     // 입장시 방안에다가 웰컴이라고 메세지 날려줌.
+    // to: 방 전체에다가 실행할 수 있는 기능.
     socket.to(roomname).emit("welcome");
   });
   socket.on("disconnecting", () => {
+    // 각 room들에다가 bye이벤트를 전송한다.
     socket.rooms.forEach((room) => socket.to(room).emit("bye"));
   });
   socket.on("new_message", (msg, room, done) => {
