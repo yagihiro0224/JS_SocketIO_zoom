@@ -17,6 +17,7 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket) => {
+  socket["nickname"] = "Anon";
   // onAny: Socket안에 어떠한 이벤트도 감시할 수 있는 기능.
   socket.onAny((event) => {
     console.log(`Socket event: ${event}`);
@@ -27,16 +28,20 @@ wsServer.on("connection", (socket) => {
     done();
     // 입장시 방안에다가 웰컴이라고 메세지 날려줌.
     // to: 방 전체에다가 실행할 수 있는 기능.
-    socket.to(roomname).emit("welcome");
+    socket.to(roomname).emit("welcome", socket.nickname);
   });
   socket.on("disconnecting", () => {
     // 각 room들에다가 bye이벤트를 전송한다.
-    socket.rooms.forEach((room) => socket.to(room).emit("bye"));
+    socket.rooms.forEach((room) =>
+      socket.to(room).emit("bye", socket.nickname)
+    );
   });
   socket.on("new_message", (msg, room, done) => {
-    socket.to(room).emit("new_message", msg);
+    socket.to(room).emit("new_message", `${socket.nickname}: ${msg}`);
     done();
   });
+  // nickname 이벤트가 발생하면 nickname을 가져와서 socket의 nickname에 저장함.
+  socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
 });
 
 httpServer.listen(3000, handleListen);
