@@ -23,6 +23,15 @@ wsServer.on("connection", (socket) => {
   socket.on("enter_room", (roomname, done) => {
     socket.join(roomname);
     done();
+    // 입장시 방안에다가 웰컴이라고 메세지 날려줌.
+    socket.to(roomname).emit("welcome");
+  });
+  socket.on("disconnecting", () => {
+    socket.rooms.forEach((room) => socket.to(room).emit("bye"));
+  });
+  socket.on("new_message", (msg, room, done) => {
+    socket.to(room).emit("new_message", msg);
+    done();
   });
 });
 
