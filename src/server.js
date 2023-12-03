@@ -22,6 +22,7 @@ function publicRoooms() {
   // sids: private한 방의 id
   // rooms: private한 방의 id 와 public한 방의 id 둘 다 있다.
   // room ID(app)를 socket ID(server)에서 찾을수 있다면 우리가 Private용 room을 찾은거다.
+  // socket안으로 들어가서 adapter를 가지고 sids랑 rooms를 가져오는거지. wsServer안에서 말이야.
   const {
     sockets: {
       adapter: { sids, rooms },
