@@ -21,9 +21,9 @@ function handleMessageSubmit(event) {
   // emit에 인자값은 첫번쨰는 키이고 두번째부터는 아무거나
   // 그리고 마지막에 무언가 실행하고 싶은 함수가 있다면 그 함수를 넣는다.
   socket.emit("new_message", input.value, roomName, () => {
-    addMessage(`You: ${value}`);
+    addMessage(`You: ${input.value}`);
+    input.value = "";
   });
-  input.value = "";
 }
 
 function handleNickNameSubmit(event) {
@@ -40,7 +40,7 @@ function showRoom() {
   const msgForm = room.querySelector("#msg");
   const nameForm = room.querySelector("#name");
   msgForm.addEventListener("submit", handleMessageSubmit);
-  nameForm.addEventListener("submit", handleNickNameSubmit);
+  // nameForm.addEventListener("submit", handleNickNameSubmit);
 }
 
 function handleRoomSubmit(event) {
@@ -50,7 +50,7 @@ function handleRoomSubmit(event) {
 
   socket.emit("enter_room", roomNameInput.value, nickNameInput.value, showRoom);
   roomName = roomNameInput.value;
-  input.value = "";
+  roomNameInput.value = "";
 }
 
 // submit: form애서 입력값을 전송할때 쓰는 이벤트.
@@ -70,3 +70,17 @@ socket.on("bye", (left) => {
 //   addMessage(msg);
 // });
 socket.on("new_message", addMessage);
+
+socket.on("room_change", (rooms) => {
+  const roomList = welcome.querySelector("ul");
+  roomList.innerHTML = "";
+  if (rooms.length === 0) {
+    return;
+  }
+  rooms.forEach((room) => {
+    const li = document.createElement("li");
+    li.innerText = room;
+    roomList.append(li);
+  });
+});
+// socket.on("room_change", (msg) => console.log(msg));
