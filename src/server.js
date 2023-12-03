@@ -41,6 +41,10 @@ function publicRoooms() {
   return publicRooms;
 }
 
+function countRoom(roomName) {
+  return wsServer.sockets.adapter.rooms.get(roomName)?.size;
+}
+
 wsServer.on("connection", (socket) => {
   socket["nickname"] = "Anon";
   // onAny: Socket안에 어떠한 이벤트도 감시할 수 있는 기능.
@@ -55,13 +59,16 @@ wsServer.on("connection", (socket) => {
     done();
     // 입장시 방안에다가 웰컴이라고 메세지 날려줌.
     // to: 방 전체에다가 실행할 수 있는 기능.
-    socket.to(roomname).emit("welcome", socket.nickname);
+    socket.to(roomname).emit("welcome", socket.nickname, countRoom(roomname));
+
+    // 모든 연결된 소켓에다가 현재 존재하는 public방의 정보를 넘김.
+    // broadcast라고 한다.
     wsServer.sockets.emit("room_change", publicRoooms());
   });
   socket.on("disconnecting", () => {
     // 각 room들에다가 bye이벤트를 전송한다.
     socket.rooms.forEach((room) =>
-      socket.to(room).emit("bye", socket.nickname)
+      socket.to(room).emit("bye", socket.nickname, countRoom(room) - 1)
     );
   });
   socket.on("disconnect", () => {
