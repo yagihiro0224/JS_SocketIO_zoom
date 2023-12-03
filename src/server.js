@@ -31,7 +31,7 @@ function publicRoooms() {
   const publicRooms = [];
   // rooms에서 key를 하나하나 들고와서
   rooms.forEach((_, key) => {
-    // private한 벙의 키가 없는 값을 publicRoom에 저장함.
+    // private한 키가 없는 값. 즉 public한 키값을 publicRoom에 저장함.
     if (sids.get(key) === undefined) {
       publicRooms.push(key);
     }
